@@ -22,6 +22,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         turretRenderer.enabled = false;
+        hoverRenderer.enabled = false;
         originalColor = spriteRenderer.color; //Chemin le plus court
     }
 
@@ -40,6 +41,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log(gameObject.name);
         hoverRenderer.enabled = false;
     }
     public void OnPointerDown(PointerEventData eventData)
