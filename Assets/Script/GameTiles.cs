@@ -9,6 +9,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] SpriteRenderer hoverRenderer;
     [SerializeField] SpriteRenderer turretRenderer;
     [SerializeField] SpriteRenderer spawnRenderer;
+    private LineRenderer lineRenderer; //JeudiEnemy
     private SpriteRenderer spriteRenderer;
 
     private Color originalColor; //Chemin le plus court
@@ -20,9 +21,39 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void Awake()
     {
+        lineRenderer =  GetComponent<LineRenderer>(); //JeudiEnemy
+        lineRenderer.enabled = false; //JeudiEnemy
+        lineRenderer.SetPosition(0, transform.position); //JeudiEnemy
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         turretRenderer.enabled = false;
         originalColor = spriteRenderer.color; //Chemin le plus court
+    }
+
+    void Update() //JeudiEnemy
+    {
+        if(turretRenderer.enabled)
+        {
+            Enemy target = null;
+            foreach(var enemy in Enemy.allEnemies)
+            {
+                if(Vector3.Distance(transform.position, enemy.transform.position) < 2)
+                {
+                    target = enemy;
+                    break;
+                }
+            }
+
+            if(target != null)
+            {
+                lineRenderer.SetPosition(1, target.transform.position);
+                lineRenderer.enabled = true;
+            }
+            else
+            {
+                lineRenderer.enabled=false;
+            }
+        }
     }
 
     internal void TurnGrey()
