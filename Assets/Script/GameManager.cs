@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
         {
-            foreach(var t in gameTiles)
+            foreach (var t in gameTiles)
             {
                 t.setPath(false);
             }
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour
             var path = Pathfinding(spawnTile, TargetTile);
             var tile = TargetTile;
 
-            while(tile != null)
+            while (tile != null)
             {
                 tile.setPath(true);
                 tile = path[tile];
@@ -97,18 +96,18 @@ public class GameManager : MonoBehaviour
 
             foreach (var v in FindNeighbor(u))
             {
-                if(!Q.Contains(v))
+                if (!Q.Contains(v))
                 {
                     continue;
                 }
                 int alt = dist[u] + 1;
 
-                if(alt < dist[v] )
+                if (alt < dist[v])
                 {
                     dist[v] = alt;
                     prev[v] = u;
                 }
-            } 
+            }
         }
         return prev;
     }
@@ -140,5 +139,4 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
     }
-
 }
