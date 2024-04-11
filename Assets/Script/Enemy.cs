@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,23 +10,31 @@ public class Enemy : MonoBehaviour
 
     private Stack<GameTiles> path = new Stack<GameTiles>();
 
-    private void Awake() //JeudiEnemy
+    internal void SetPath(List<GameTiles> pathToGoal)
     {
-        allEnemies.Add(this);
+        path.Clear();
+        
+        foreach(GameTiles tile in pathToGoal)
+        {
+            path.Push(tile);
+        }
     }
 
     private void Update()
     {
-        transform.position += Vector3.right * Time.deltaTime;
-
         if(path.Count > 0)
         {
+            Vector3 destPos = path.Peek().transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, destPos, 2 * Time.deltaTime);
 
-        }
-        else
-        {
-            allEnemies.Remove(this);
-            Destroy(gameObject);
+            if (Vector3.Distance(transform.position, destPos) < 0.01f)
+            {
+                path.Pop();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

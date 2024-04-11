@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     const int rowcount = 10;
 
     public GameTiles TargetTile { get; internal set; }
+    List<GameTiles> pathToGoal = new List<GameTiles>();
 
     private void Awake()
     {
@@ -55,9 +56,11 @@ public class GameManager : MonoBehaviour
 
             while (tile != null)
             {
+                pathToGoal.Add(tile);
                 tile.setPath(true);
                 tile = path[tile];
             }
+            StartCoroutine(SpawnEnemyCoroutine());
         }
     }
 
@@ -134,7 +137,8 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 yield return new WaitForSeconds(0.6f);
-                Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
+                var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
+                enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
             yield return new WaitForSeconds(2f);
         }

@@ -11,7 +11,8 @@ public class XavierTracker : MonoBehaviour
     {
         if(destinationIndex < destinations.Count)
         {
-            transform.position = Vector3.Lerp(transform.position, destinations[0].position, 2 * Time.deltaTime);
+            Vector3 destPos = destinations[destinationIndex].position;
+            transform.position = Vector3.MoveTowards(transform.position, destPos, 2 * Time.deltaTime);
 
             if(Vector3.Distance(transform.position, destinations[destinationIndex].position) < 0.01f)
             {
