@@ -1570,6 +1570,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GamesTiles
       objectReference: {fileID: 0}
+    - target: {fileID: 4239424022003042054, guid: 2ff9a6e8526b1f04eb8925d96d682b5c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         spawnTile = gameTiles[1, 8];
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
+        //TargetTile = gameTiles[13, 3]; //Level design
     }
 
     private void Update() //Chemin le plus court
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
         {
             dist.Add(v, 9999);
 
-            dist.Add(v, 0); //Dans le code du prof il met "null"
+            prev.Add(v, null);  
 
             Q.Add(v);
         }
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
 
             foreach (var v in FindNeighbor(u))
             {
-                if (!Q.Contains(v))
+                if (!Q.Contains(v) || v.IsBlocked)
                 {
                     continue;
                 }

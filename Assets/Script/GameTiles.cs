@@ -10,10 +10,8 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] SpriteRenderer turretRenderer;
     [SerializeField] SpriteRenderer spawnRenderer;
     private LineRenderer lineRenderer; //JeudiEnemy
-    private SpriteRenderer spriteRenderer;
-
-    private Color originalColor; //Chemin le plus court
-
+    private SpriteRenderer spriteRenderer; 
+    private Color originalColor; //Chemin le plus court 
     public GameManager GM { get; internal set; } //Chemin le plus court
     public int X { get; internal set; }//Chemin le plus court
     public int Y { get; internal set; }//Chemin le plus court
@@ -23,11 +21,10 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         lineRenderer =  GetComponent<LineRenderer>(); //JeudiEnemy
         lineRenderer.enabled = false; //JeudiEnemy
-        lineRenderer.SetPosition(0, transform.position); //JeudiEnemy
-
+        lineRenderer.SetPosition(0, transform.position); //JeudiEnemy 
         spriteRenderer = GetComponent<SpriteRenderer>();
         turretRenderer.enabled = false;
-        hoverRenderer.enabled = false;
+       // hoverRenderer.enabled = false;
         originalColor = spriteRenderer.color; //Chemin le plus court
     }
 

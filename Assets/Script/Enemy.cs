@@ -7,13 +7,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>(); //JeudiEnemy
-
     private Stack<GameTiles> path = new Stack<GameTiles>();
+
+    private void Awake()
+    {
+        allEnemies.Add(this);
+    }
 
     internal void SetPath(List<GameTiles> pathToGoal)
     {
-        path.Clear();
-        
+        path.Clear(); 
         foreach(GameTiles tile in pathToGoal)
         {
             path.Push(tile);
@@ -33,7 +36,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
     }
