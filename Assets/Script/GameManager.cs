@@ -11,10 +11,9 @@ public class GameManager : MonoBehaviour
     GameTiles[,] gameTiles;
     private GameTiles spawnTile;
     const int colcount = 20;
-    const int rowcount = 10;
-
+    const int rowcount = 10; 
     public GameTiles TargetTile { get; internal set; }
-    List<GameTiles> pathToGoal = new List<GameTiles>();
+    List<GameTiles> pathToGoal = new List<GameTiles>(); 
 
     private void Awake()
     {
@@ -40,29 +39,30 @@ public class GameManager : MonoBehaviour
         spawnTile = gameTiles[1, 8];
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
-        //TargetTile = gameTiles[13, 3]; //Level design
-    }
-
-    private void Update() //Chemin le plus court
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && TargetTile != null)
+        TargetTile = gameTiles[16, 3]; //Level design
+        for(int y = 2; y <= 9; y++)
         {
-            foreach (var t in gameTiles)
-            {
-                t.setPath(false);
-            }
-
-            var path = Pathfinding(spawnTile, TargetTile);
-            var tile = TargetTile;
-
-            while (tile != null)
-            {
-                pathToGoal.Add(tile);
-                tile.setPath(true);
-                tile = path[tile];
-            }
-            StartCoroutine(SpawnEnemyCoroutine());
+            gameTiles[3, y].SetWall(); 
         }
+    } 
+
+    private void Start() //Level design
+    {
+        foreach (var t in gameTiles)
+        {
+            t.setPath(false);
+        }
+
+        var path = Pathfinding(spawnTile, TargetTile);
+        var tile = TargetTile;
+
+        while (tile != null)
+        {
+            pathToGoal.Add(tile);
+            tile.setPath(true);
+            tile = path[tile];
+        }
+        StartCoroutine(SpawnEnemyCoroutine()); //Faire spawn les ennemis
     }
 
     private Dictionary<GameTiles, GameTiles> Pathfinding(GameTiles sourceTile, GameTiles targetTile) //Chemin le plus court
@@ -133,7 +133,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnEnemyCoroutine()
     {
-        for (int j = 0; j < 5; j++)
+        yield return new WaitForSeconds(3f);
+        while (true)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -141,7 +142,7 @@ public class GameManager : MonoBehaviour
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
         }
     }
 }

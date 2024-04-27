@@ -57,14 +57,14 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     internal void TurnGrey()
     {
         spriteRenderer.color = Color.gray;
-        originalColor = spriteRenderer.color; //Chemin le plus court
+        originalColor = spriteRenderer.color;  
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log(gameObject.name);
         hoverRenderer.enabled = true;
-        GM.TargetTile = this; //Chemin le plus court
+        //GM.TargetTile = this; //Level Design (pour les //)
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -75,7 +75,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         turretRenderer.enabled = !turretRenderer.enabled;
-        IsBlocked = turretRenderer.enabled; //Chemin le plus court
+        IsBlocked = turretRenderer.enabled; 
     }
 
     internal void SetEnemySpawn()
@@ -83,8 +83,13 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         spawnRenderer.enabled = true;
     }
 
-    internal void setPath(bool isPath)//Chemin le plus court
+    internal void setPath(bool isPath) 
     {
         spriteRenderer.color = isPath ? Color.yellow : originalColor;
+    }
+
+    internal void SetWall()
+    {
+        
     }
 }
