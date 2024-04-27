@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (path.Count > 0)
+        if(path.Count > 0)
         {
             Vector3 destPos = path.Peek().transform.position;
             transform.position = Vector3.MoveTowards(transform.position, destPos, 2 * Time.deltaTime);
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
-    }
+    } 
 
     private void Die()
     {
