@@ -19,7 +19,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public int Y { get; internal set; }//Chemin le plus court
     public bool IsBlocked { get; internal set; } //Chemin le plus court
 
-    bool canAttack;
+    private bool canAttack = true;
 
     private void Awake()
     {
@@ -87,20 +87,6 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         { 
             turretRenderer.enabled = true;
         }
-
-        //if (numberOfTurretsPlaced <= 5)
-        //{
-        //    turretRenderer.enabled = true;
-        //    caseHaveTurret++; 
-
-        //   // numberOfTurretsPlaced++;
-        //    IsBlocked = turretRenderer.enabled;
-        //    Debug.Log(numberOfTurretsPlaced); 
-        //}
-        //if (caseHaveTurret == 1)
-        //{
-        //    numberOfTurretsPlaced++;
-        //}
     } 
 
     internal void SetEnemySpawn()
