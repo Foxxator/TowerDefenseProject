@@ -134,7 +134,8 @@ public class GameManager : MonoBehaviour
     IEnumerator SpawnEnemyCoroutine()
     {
         yield return new WaitForSeconds(3f);
-        while (true)
+        int enemycount = 0;
+        while (enemycount < 25)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
+            enemycount += 5;
             yield return new WaitForSeconds(3f);
         }
     }
