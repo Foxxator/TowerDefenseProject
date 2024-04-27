@@ -40,9 +40,15 @@ public class GameManager : MonoBehaviour
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
         TargetTile = gameTiles[16, 3]; //Level design
+
+        
         for(int y = 2; y <= 9; y++)
         {
-            gameTiles[3, y].SetWall(); 
+            gameTiles[5, y].SetWall(); 
+        }
+        for (int y = 0; y <= 7; y++)
+        {
+            gameTiles[10, y].SetWall();
         }
     } 
 
