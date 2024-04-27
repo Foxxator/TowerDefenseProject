@@ -40,10 +40,10 @@ public class Enemy : MonoBehaviour
             {
                 path.Pop();
             }
-            else
-            {
-                Die();
-            }
+        }
+        else
+        {
+            Die();
         }
     } 
 
