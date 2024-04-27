@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.VFX;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
-{
+{ 
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>(); //JeudiEnemy
     private Stack<GameTiles> path = new Stack<GameTiles>();
+    //public TextMesh texteHPennemi;
+    int hp = 5;
 
     private void Awake()
     {
         allEnemies.Add(this);
-    }
+    } 
 
+     
     internal void SetPath(List<GameTiles> pathToGoal)
     {
         path.Clear(); 
@@ -36,8 +42,23 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                //Destroy(gameObject);
+                Die();
             }
         }
+    } 
+
+    private void Die()
+    {
+        allEnemies.Remove(this);
+        Destroy(gameObject);
+       // texteHPennemi.text = hp.ToString();
+    }
+
+    internal void Attack()
+    {
+        if(--hp <= 0)
+        { 
+            Die();
+        } 
     }
 }
