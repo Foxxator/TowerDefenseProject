@@ -5,16 +5,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //Ref à la tuile
-    [SerializeField] GameObject GameTilesPrefab;
-    [SerializeField] GameObject enemyPrefab;
-
+    [SerializeField] GameObject GameTilesPrefab;  
+    [SerializeField] GameObject enemyPrefab; 
     GameTiles[,] gameTiles;
     private GameTiles spawnTile;
     const int colcount = 20;
-    const int rowcount = 10; 
+    const int rowcount = 10;
+
+    [SerializeField] int experience = 0;
+
     public GameTiles TargetTile { get; internal set; }
     List<GameTiles> pathToGoal = new List<GameTiles>(); 
-
+     
     private void Awake()
     {
         gameTiles = new GameTiles[colcount, rowcount];
@@ -23,26 +25,33 @@ public class GameManager : MonoBehaviour
         {
             for (int y = 0; y < rowcount; y++)
             {
-                var spawnPosition = new Vector3(x, y, 0);
-                var tile = Instantiate(GameTilesPrefab, spawnPosition, Quaternion.identity);
-                gameTiles[x, y] = tile.GetComponent<GameTiles>();
-                gameTiles[x, y].GM = this; //Chemin le plus court
-                gameTiles[x, y].X = x; //Chemin le plus court
-                gameTiles[x, y].Y = y; //Chemin le plus court
+                var spawnPosition = new Vector3(x, y, 0); 
+                    var tile = Instantiate(GameTilesPrefab, spawnPosition, Quaternion.identity);
+                    gameTiles[x, y] = tile.GetComponent<GameTiles>();
+                    gameTiles[x, y].GM = this; //Chemin le plus court
+                    gameTiles[x, y].X = x; //Chemin lpc
+                    gameTiles[x, y].Y = y; //Chemin lpc
 
-                if ((x + y) % 2 == 0)
-                {
-                    gameTiles[x, y].TurnGrey();
-                }
-            }
+                    if ((x + y) % 2 == 0)
+                    {
+                        gameTiles[x, y].TurnGrey();
+                    }
+            } 
         }
-        spawnTile = gameTiles[1, 8];
+        spawnTile = gameTiles[1, 7];
         spawnTile.SetEnemySpawn();
-        StartCoroutine(SpawnEnemyCoroutine());
+        //StartCoroutine(SpawnEnemyCoroutine());
         TargetTile = gameTiles[16, 3]; //Level design
+
+        //Créations de murs ici
         for(int y = 2; y <= 9; y++)
         {
-            gameTiles[3, y].SetWall(); 
+            gameTiles[5, y].SetWall(); 
+        }
+
+        for (int y = 0; y <= 7; y++)
+        {
+            gameTiles[10, y].SetWall();
         }
     } 
 
@@ -135,14 +144,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         while (true)
-        {
-            for (int i = 0; i < 5; i++)
+         {
+            for (int i = 0; i < 1; i++) // i < le nombre d'ennemis à la traîne 
             {
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(0.1f); //Les secondes entre chaque traîne
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
         }
     }
 }
