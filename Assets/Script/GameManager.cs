@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +23,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         gameTiles = new GameTiles[colcount, rowcount];
 
         for (int x = 0; x < colcount; x++)
@@ -46,7 +55,7 @@ public class GameManager : MonoBehaviour
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
         TargetTile = gameTiles[16, 3]; //Level design
-          
+        
         for(int y = 2; y <= 9; y++)
         {
             gameTiles[5, y].SetWall(); 
@@ -54,15 +63,6 @@ public class GameManager : MonoBehaviour
         for (int y = 0; y <= 7; y++)
         {
             gameTiles[10, y].SetWall();
-        }
-         
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
@@ -167,17 +167,17 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         int enemycount = 0;
-        while (enemycount < 15)
+        while (enemycount < 25)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
-                yield return new WaitForSeconds(0.4f); 
+                yield return new WaitForSeconds(0.6f);
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
-            enemycount += 3;
+            enemycount += 5;
             ennemySpawned = true;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
