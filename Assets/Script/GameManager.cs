@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,9 +55,10 @@ public class GameManager : MonoBehaviour
         spawnTile = gameTiles[1, 8];
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
-        TargetTile = gameTiles[16, 3]; //Level design
-        
-        for(int y = 2; y <= 9; y++)
+        TargetTile = gameTiles[16, 3]; //Level design  
+        TargetTile = gameTiles[18, 1]; //Level design  
+
+        for (int y = 2; y <= 9; y++)
         {
             gameTiles[5, y].SetWall(); 
         }
@@ -64,6 +66,11 @@ public class GameManager : MonoBehaviour
         {
             gameTiles[10, y].SetWall();
         }
+        for (int y = 2; y <= 9; y++)
+        {
+            gameTiles[12, y].SetWall();
+        }
+
     }
 
     private void Start() //Level design
@@ -167,17 +174,17 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         int enemycount = 0;
-        while (enemycount < 25)
+        while (enemycount < 15)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(0.3f);
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
             enemycount += 5;
             ennemySpawned = true;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
