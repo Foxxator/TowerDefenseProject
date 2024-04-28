@@ -387,6 +387,7 @@ MonoBehaviour:
   GameTilesPrefab: {fileID: 192195287}
   enemyPrefab: {fileID: 4829921253261917543, guid: cea8bc018d53da3499b7c3619ed2230c, type: 3}
   WinScreen: {fileID: 726428517}
+  LoseScreen: {fileID: 1204473699}
 --- !u!1 &1018123988
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +559,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 12909097}
   m_SourcePrefab: {fileID: 100100000, guid: e124ebfc25aedb34ead8d1b2ef0b416d, type: 3}
+--- !u!1 &1204473699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2202487745535038642, guid: 0d21d4a250340d8478de26fffa0d71a3, type: 3}
+  m_PrefabInstance: {fileID: 4833233116600651331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2064415411577035796
 PrefabInstance:
   m_ObjectHideFlags: 0

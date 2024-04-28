@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
 
     private void PerdreVie()
     {
-        GameManager.instance.PerdreVie();
+        GameManager.Instance.PerdreVie();
         Destroy(gameObject);
     }
 

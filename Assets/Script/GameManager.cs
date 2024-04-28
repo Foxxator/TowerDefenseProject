@@ -8,11 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject GameTilesPrefab;
     [SerializeField] GameObject enemyPrefab;
 
+    public static GameManager Instance;
     GameTiles[,] gameTiles;
     private GameTiles spawnTile;
     const int colcount = 20;
     const int rowcount = 10;
-    private int HP = 5;
+    private int HP = 10;
     public GameObject WinScreen;
     public GameObject LoseScreen;
     private bool ennemySpawned = false;
@@ -54,7 +55,16 @@ public class GameManager : MonoBehaviour
         {
             gameTiles[10, y].SetWall();
         }
-    } 
+
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start() //Level design
     {
