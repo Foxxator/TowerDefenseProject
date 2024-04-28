@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -45,8 +46,7 @@ public class GameManager : MonoBehaviour
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
         TargetTile = gameTiles[16, 3]; //Level design
-
-        
+          
         for(int y = 2; y <= 9; y++)
         {
             gameTiles[5, y].SetWall(); 
@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
         {
             gameTiles[10, y].SetWall();
         }
-
-        if(Instance == null)
+         
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -167,17 +167,17 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         int enemycount = 0;
-        while (enemycount < 25)
+        while (enemycount < 15)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(0.4f); 
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
-            enemycount += 5;
+            enemycount += 3;
             ennemySpawned = true;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 

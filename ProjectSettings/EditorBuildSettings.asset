@@ -9,6 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 4eb720ad8694ee94898277d1e9b559f5
   - enabled: 1
+    path: Assets/Scenes/Tableau1.unity
+    guid: cfce57a4eefc1ae41ab30e3aaf547663
+  - enabled: 1
+    path: Assets/Scenes/Tableau2.unity
+    guid: f91a4d12bbfa46a4d93ccaddd589eef7
+  - enabled: 1
+    path: Assets/Scenes/Tableau3.unity
+    guid: 9f77222032ac98349bc9f72c94d36b44
+  - enabled: 1
+    path: Assets/Scenes/Tableau4.unity
+    guid: 4ae3ae36fac38c94595c8e3ae37ed0b0
+  - enabled: 1
+    path: Assets/Scenes/Tableau5.unity
+    guid: 08f9232c719bc7949a995be32490eef8
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
