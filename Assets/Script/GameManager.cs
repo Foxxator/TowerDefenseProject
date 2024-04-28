@@ -11,7 +11,11 @@ public class GameManager : MonoBehaviour
     GameTiles[,] gameTiles;
     private GameTiles spawnTile;
     const int colcount = 20;
-    const int rowcount = 10; 
+    const int rowcount = 10;
+    private int HP = 5;
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
+    private bool ennemySpawned = false;
     public GameTiles TargetTile { get; internal set; }
     List<GameTiles> pathToGoal = new List<GameTiles>(); 
 
@@ -54,6 +58,9 @@ public class GameManager : MonoBehaviour
 
     private void Start() //Level design
     {
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+
         foreach (var t in gameTiles)
         {
             t.setPath(false);
@@ -69,6 +76,15 @@ public class GameManager : MonoBehaviour
             tile = path[tile];
         }
         StartCoroutine(SpawnEnemyCoroutine()); //Faire spawn les ennemis
+    }
+
+    private void Update()
+    {
+        if (!RemainingEnemies() && ennemySpawned)
+        {
+            Time.timeScale = 0;
+            WinScreen.SetActive(true);
+        }
     }
 
     private Dictionary<GameTiles, GameTiles> Pathfinding(GameTiles sourceTile, GameTiles targetTile) //Chemin le plus court
@@ -150,7 +166,23 @@ public class GameManager : MonoBehaviour
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
             enemycount += 5;
+            ennemySpawned = true;
             yield return new WaitForSeconds(3f);
+        }
+    }
+
+    private bool RemainingEnemies()
+    {
+        return Enemy.allEnemies.Count > 0;
+    }
+    
+    public void PerdreVie()
+    {
+        HP--;
+        if(HP <= 0)
+        {
+            Time.timeScale = 0;
+            LoseScreen.SetActive(true);
         }
     }
 }
