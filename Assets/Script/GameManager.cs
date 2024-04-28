@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         gameTiles = new GameTiles[colcount, rowcount];
 
         for (int x = 0; x < colcount; x++)
@@ -45,7 +55,6 @@ public class GameManager : MonoBehaviour
         spawnTile.SetEnemySpawn();
         StartCoroutine(SpawnEnemyCoroutine());
         TargetTile = gameTiles[16, 3]; //Level design
-
         
         for(int y = 2; y <= 9; y++)
         {
@@ -54,15 +63,6 @@ public class GameManager : MonoBehaviour
         for (int y = 0; y <= 7; y++)
         {
             gameTiles[10, y].SetWall();
-        }
-
-        if(Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
