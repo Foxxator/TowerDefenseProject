@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTilesPrefab: {fileID: 628298815}
-  enemyPrefab: {fileID: 4829921253261917543, guid: cea8bc018d53da3499b7c3619ed2230c, type: 3}
+  enemyPrefab: {fileID: 6913249503447469035, guid: ad355e15b78b98d40b55d372ccc9aa9e, type: 3}
   WinScreen: {fileID: 1766593402}
   LoseScreen: {fileID: 1334683034}
 --- !u!4 &1296942312
