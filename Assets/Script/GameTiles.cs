@@ -14,7 +14,7 @@ public class GameTiles : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private LineRenderer lineRenderer; //JeudiEnemy
     private SpriteRenderer spriteRenderer;
     private Color originalColor; //Chemin le plus court 
-    public GameManager GM { get; internal set; } //Chemin le plus court
+    public GameManager GM { get; internal set; } //Chemin le plus court 
     public int X { get; internal set; }//Chemin le plus court
     public int Y { get; internal set; }//Chemin le plus court
     public bool IsBlocked { get; internal set; } //Chemin le plus court
