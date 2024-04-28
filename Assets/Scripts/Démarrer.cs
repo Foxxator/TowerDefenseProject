@@ -7,7 +7,7 @@ public class Démarrer : MonoBehaviour
 {
     [SerializeField] public int sceneindex = 0;
 
-    public void Update()
+    public void NextScene()
     {
         SceneManager.LoadScene(sceneindex);
     }

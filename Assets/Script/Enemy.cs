@@ -44,8 +44,15 @@ public class Enemy : MonoBehaviour
         else
         {
             Die();
+            PerdreVie();
         }
     } 
+
+    private void PerdreVie()
+    {
+        GameManager.instance.PerdreVie();
+        Destroy(gameObject);
+    }
 
     private void Die()
     {
