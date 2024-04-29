@@ -15,6 +15,8 @@ public class XavierNodeButton : MonoBehaviour
 {
     [SerializeField] XavierNodeButton parentNode;
     [SerializeField] SpriteRenderer spriteRenderer;
+    public int expCost = 2;
+    public int HPadd = 2;
     LineRenderer lineRenderer;
     NodeState currentState = NodeState.Unaccessible;
 
@@ -71,13 +73,15 @@ public class XavierNodeButton : MonoBehaviour
                 }
                 break;
         }
-    }
+    }   
 
     private void OnMouseDown()
     {
-        if(currentState == NodeState.Accessible)
+        if(currentState == NodeState.Accessible && GameManager.Instance.Exp >= expCost && CompareTag("NodeHP"))
         {
+            GameManager.Instance.AddExperience(-expCost);
             SetState(NodeState.Obtained);
+            GameManager.Instance.AddHP(HPadd);
         }
     }
 }

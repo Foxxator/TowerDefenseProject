@@ -15,10 +15,15 @@ public class GameManager : MonoBehaviour
     private GameTiles spawnTile;
     const int colcount = 20;
     const int rowcount = 10;
-    private int HP = 10;
+    public int HP = 10;
     public GameObject WinScreen;
     public GameObject LoseScreen;
     private bool ennemySpawned = false;
+    public UiManager uiManager;
+    private int remainingEnemies;
+    private int remainingHP;
+    private int enemycount = 0;
+    public int Exp = 0;
     public GameTiles TargetTile { get; internal set; }
     List<GameTiles> pathToGoal = new List<GameTiles>(); 
 
@@ -93,6 +98,10 @@ public class GameManager : MonoBehaviour
             tile = path[tile];
         }
         StartCoroutine(SpawnEnemyCoroutine()); //Faire spawn les ennemis
+
+        remainingEnemies = 15 - enemycount;
+        remainingHP = HP / 2;
+        uiManager.UpdateUI(remainingEnemies, remainingHP, Exp);
     }
 
     private void Update()
@@ -102,6 +111,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             WinScreen.SetActive(true);
         }
+
+        remainingEnemies = 15 - enemycount / 2;
+        remainingHP = HP / 2;
+        uiManager.UpdateUI(remainingEnemies, remainingHP, Exp);
     }
 
     private Dictionary<GameTiles, GameTiles> Pathfinding(GameTiles sourceTile, GameTiles targetTile) //Chemin le plus court
@@ -173,8 +186,7 @@ public class GameManager : MonoBehaviour
     IEnumerator SpawnEnemyCoroutine()
     {
         yield return new WaitForSeconds(3f);
-        int enemycount = 0;
-        while (enemycount < 15)
+        while (enemycount < 25)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -182,7 +194,8 @@ public class GameManager : MonoBehaviour
                 var enemy = Instantiate(enemyPrefab, spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(pathToGoal);
             }
-            enemycount += 5;
+
+            enemycount += 3;
             ennemySpawned = true;
             yield return new WaitForSeconds(2f);
         }
@@ -201,5 +214,25 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             LoseScreen.SetActive(true);
         }
+    }
+
+    public void UpdateValues(int newremainingEnemies, int newremainingHP, int newExp)
+    {
+        remainingHP = newremainingHP;
+        remainingEnemies = newremainingEnemies;
+        Exp = newExp;
+        uiManager.UpdateUI(newremainingEnemies, newremainingHP, newExp);
+    }
+
+    public void AddExperience(int nbexp)
+    {
+        Exp += nbexp;
+        uiManager.UpdateUI(remainingEnemies, remainingHP, Exp);
+    }
+
+    public void AddHP(int nbHP)
+    {
+        HP += nbHP;
+        uiManager.UpdateUI(remainingEnemies, remainingHP, Exp);
     }
 }

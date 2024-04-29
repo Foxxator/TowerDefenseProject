@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour
         if(--hp <= 0)
         { 
             Die();
+            GameManager.Instance.AddExperience(1);
         } 
     }
 }

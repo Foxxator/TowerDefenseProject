@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TextMeshProUGUI remainingEnemiestxt;
+    public TextMeshProUGUI remainingHPtxt;
+    public TextMeshProUGUI Exptxt;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateUI(int remainingEnemies, int remainingHP, int Exp)
     {
-        
+        remainingEnemiestxt.text = "Ennemis restants : " + remainingEnemies;
+        remainingHPtxt.text = "HP : " + remainingHP;
+        Exptxt.text = "Exp : " + Exp;
     }
 }
