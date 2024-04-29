@@ -10,9 +10,8 @@ using TMPro;
 public class Enemy : MonoBehaviour
 { 
     public static HashSet<Enemy> allEnemies = new HashSet<Enemy>(); //JeudiEnemy
-    private Stack<GameTiles> path = new Stack<GameTiles>();
-    //public TextMesh texteHPennemi;
-    int hp = 5;
+    private Stack<GameTiles> path = new Stack<GameTiles>(); 
+    int hp = 5; 
 
     private void Awake()
     {
@@ -57,8 +56,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         allEnemies.Remove(this);
-        Destroy(gameObject);
-       // texteHPennemi.text = hp.ToString();
+        Destroy(gameObject); 
     }
 
     internal void Attack()
